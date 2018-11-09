@@ -28,7 +28,7 @@ public interface PersonDao {
      * Retrieves a person record by ID.
      *
      * @param id the person ID
-     * @return the person record
+     * @return the person record, or null if the id does not exist in the database
      */
     Person readPerson(Integer id);
 
@@ -45,4 +45,11 @@ public interface PersonDao {
      * @param id the person ID
      */
     void deletePerson(Integer id);
+
+    /**
+     *
+     * @param id the person ID
+     * @return true if there is a record in the database with the given ID, false otherwise
+     */
+    boolean exists(Integer id);
 }
