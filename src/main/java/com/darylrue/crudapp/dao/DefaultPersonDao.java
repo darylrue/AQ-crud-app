@@ -18,6 +18,7 @@ package com.darylrue.crudapp.dao;
 
 import com.darylrue.crudapp.dao.PersonDao;
 import com.darylrue.crudapp.domain.Person;
+import com.darylrue.crudapp.util.Confirmation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
@@ -30,11 +31,11 @@ import java.util.List;
  * Spring JDBC implementation of {@link PersonDao}.
  */
 @Component
-public class PersonJpaDao implements PersonDao {
+public class DefaultPersonDao implements PersonDao {
 
     private PersonRepository personRepository;
 
-    public PersonJpaDao(PersonRepository personRepository) {
+    public DefaultPersonDao(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
 
@@ -47,38 +48,46 @@ public class PersonJpaDao implements PersonDao {
     /**
      *
      * @param personId
-     * @return the Person object, or null if personId is not found
+     * @return the Person object
      */
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Person readPerson(Integer personId) {
-        if(personRepository.existsById(personId))
-            return personRepository.getOne(personId);
-        return null;
+        return personRepository.getOne(personId);
     }
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
-    public void deletePerson(Integer personId) {
-        personRepository.deleteById(personId);
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public Confirmation deletePerson(Integer personId) {
+        if(personRepository.existsById(personId)) {
+            personRepository.deleteById(personId);
+            return new Confirmation(true);
+        }
+        return new Confirmation(false, "Id not found.");
     }
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
-    public void updatePerson(Person person) {
-        if(personRepository.existsById(person.getPersonId()))
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public Confirmation updatePerson(Person person) {
+        Integer id = person.getPersonId();
+        if(id == null) return new Confirmation(false, "Id cannot be null.");
+        if(personRepository.existsById(id)) {
             personRepository.save(person);
+            return new Confirmation(true);
+        }
+        return new Confirmation(false, "Person not found.");
     }
 
     /**
      *
      * @param person the values to save
-     * @return the generated Integer id of the persisted person object
+     * @return the generated Integer id of the persisted person object or null
      */
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
+    @Transactional(propagation = Propagation.SUPPORTS)
     public Integer createPerson(Person person) {
         Person persistedPerson = personRepository.save(person);
+        if(persistedPerson == null) return null;
         return persistedPerson.getPersonId();
     }
 

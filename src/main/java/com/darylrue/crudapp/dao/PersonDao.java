@@ -1,6 +1,7 @@
 package com.darylrue.crudapp.dao;
 
 import com.darylrue.crudapp.domain.Person;
+import com.darylrue.crudapp.util.Confirmation;
 
 import java.util.List;
 
@@ -28,23 +29,25 @@ public interface PersonDao {
      * Retrieves a person record by ID.
      *
      * @param id the person ID
-     * @return the person record, or null if the id does not exist in the database
+     * @return the person record
      */
     Person readPerson(Integer id);
 
     /**
      * Updates an existing person record.
      *
-     * @param person the new values to save
+     * @param person the Person object to be updated
+     * @return a Confirmation object (Confirmation.success : boolean, Confirmation.message : String)
      */
-    void updatePerson(Person person);
+    Confirmation updatePerson(Person person);
 
     /**
      * Deletes a person record by ID.
      *
      * @param id the person ID
+     * @return a Confirmation object (Confirmation.success : boolean, Confirmation.message : String)
      */
-    void deletePerson(Integer id);
+    Confirmation deletePerson(Integer id);
 
     /**
      *
