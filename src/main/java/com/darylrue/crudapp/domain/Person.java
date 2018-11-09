@@ -1,7 +1,6 @@
 package com.darylrue.crudapp.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.javafx.beans.IDProperty;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

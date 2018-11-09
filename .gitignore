@@ -23,3 +23,34 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+
+### Angular ###
+# compiled output
+UI/dist
+UI/tmp
+UI/out-tsc
+
+# dependencies
+UI/node_modules
+
+# IDEs and editors
+UI/.project
+UI/.classpath
+UI/.c9/
+*.launch
+UI/.settings/
+*.sublime-workspace
+
+# misc
+UI/.sass-cache
+UI/connect.lock
+UI/coverage
+libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+UI/typings
+
+# System Files
+.DS_Store
+Thumbs.db
