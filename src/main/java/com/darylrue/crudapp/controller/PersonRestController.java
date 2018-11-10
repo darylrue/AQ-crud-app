@@ -32,31 +32,30 @@ public class PersonRestController {
             Person person = personDao.readPerson(id);
             return new ResponseEntity<>(person, HttpStatus.OK);
         }
-        return new ResponseEntity<>("Person not found", HttpStatus.INTERNAL_SERVER_ERROR);
+        Confirmation confirmation = new Confirmation(false, "Person not found.");
+        return new ResponseEntity<>(confirmation, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createPerson(@RequestBody @Valid Person person) {
+    public ResponseEntity<Confirmation> createPerson(@RequestBody @Valid Person person) {
         Integer id = personDao.createPerson(person);
-        if(id != null) {
-            return new ResponseEntity<>("New Person created. The generated personId is: " +
-                    id, HttpStatus.OK);
-        }
-        return new ResponseEntity<>("Error creating person.", HttpStatus.INTERNAL_SERVER_ERROR);
+        Confirmation confirmation = new Confirmation(true,
+                    "New Person created. The generated personId is: " + id);
+        return new ResponseEntity<>(confirmation, HttpStatus.OK);
     }
 
     @PutMapping("/edit")
-    public ResponseEntity<String> editPerson(@RequestBody @Valid Person person) {
+    public ResponseEntity<Confirmation> editPerson(@RequestBody @Valid Person person) {
         Confirmation confirmation = personDao.updatePerson(person);
         if(confirmation.success) {
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(confirmation, HttpStatus.OK);
         }
-        return new ResponseEntity<>(confirmation.message, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(confirmation, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> deletePerson(@PathVariable("id") int id) {
+    public ResponseEntity<Object> deletePerson(@PathVariable("id") int id) {
         Confirmation confirmation = personDao.deletePerson(id);
         if(confirmation.success) return new ResponseEntity<>(HttpStatus.OK);
         return new ResponseEntity<>(confirmation.message, HttpStatus.INTERNAL_SERVER_ERROR);

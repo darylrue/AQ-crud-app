@@ -1,7 +1,7 @@
 <h1>Person Listing</h1>
-<p><a href="">Create New Person</a></p>
+<p><a [routerLink]="'/create-person'">Create New Person</a></p>
 
-<div *ngIf="people?.length > 0; else peopleEmpty" class="table-wrapper" >
+<div *ngIf="people?.length > 0; else noResults" class="table-wrapper" >
   <table class="table">
     <thead>
     <tr>
@@ -17,14 +17,14 @@
         <td>{{person.lastName}}</td>
         <td>{{person.emailAddress}}</td>
         <td>
-          <a href="" class="text-nowrap">Edit Person</a>
+          <a [routerLink]="['/edit-person', person.personId]" class="text-nowrap">Edit Person</a>
           <a href="" class="ml-4 text-nowrap">Delete Person</a>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
-<ng-template #peopleEmpty>No results found.</ng-template>
+<ng-template #noResults>No results found.</ng-template>
 
 
 

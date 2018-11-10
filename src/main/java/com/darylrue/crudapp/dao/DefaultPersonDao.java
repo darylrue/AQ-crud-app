@@ -81,13 +81,12 @@ public class DefaultPersonDao implements PersonDao {
     /**
      *
      * @param person the values to save
-     * @return the generated Integer id of the persisted person object or null
+     * @return the generated Integer id of the persisted person object
      */
     @Override
     @Transactional(propagation = Propagation.SUPPORTS)
     public Integer createPerson(Person person) {
         Person persistedPerson = personRepository.save(person);
-        if(persistedPerson == null) return null;
         return persistedPerson.getPersonId();
     }
 

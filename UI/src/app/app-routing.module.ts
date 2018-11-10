@@ -3,10 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import {PeopleComponent} from "./components/people/people.component";
 import {HomeComponent} from "./components/home/home.component";
 import {ClientsComponent} from "./components/clients/clients.component";
+import {CreatePersonComponent} from "./components/people/create-person/create-person.component";
+import {EditPersonComponent} from "./components/people/edit-person/edit-person.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'people', component: PeopleComponent },
+  { path: 'create-person', component: CreatePersonComponent },
+  { path: 'edit-person/:id', component: EditPersonComponent },
   { path: 'clients', component: ClientsComponent }
 ];
 
