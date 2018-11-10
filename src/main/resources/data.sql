@@ -11,7 +11,7 @@ INSERT INTO person
 VALUES (
     'John',
     'Smith',
-    'fake1@aquent.com',
+    'fake1@email.com',
     '123 Any St.',
     'Asheville',
     'NC',
@@ -19,7 +19,7 @@ VALUES (
 ), (
     'Jane',
     'Smith',
-    'fake2@aquent.com',
+    'fake2@email.com',
     '123 Any St.',
     'Asheville',
     'NC',

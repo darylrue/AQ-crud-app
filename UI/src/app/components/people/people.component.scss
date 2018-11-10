@@ -1,0 +1,10 @@
+.table-wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+
+  .table {
+    max-width: 1000px;
+  }
+}
+

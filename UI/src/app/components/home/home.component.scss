@@ -1,0 +1,43 @@
+@import "../mixins";
+
+.home-wrapper {
+  padding: 15px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.container {
+  max-width: 700px;
+}
+
+.title {
+  font-size: 24px;
+
+  @include when-width(440px) {
+    font-size: 28px;
+  }
+  @include when-width(576px) {
+    font-size: 32px;
+  }
+  @include when-width(768px) {
+    font-size: 36px;
+  }
+  @include when-width(992px) {
+    font-size: 40px;
+  }
+}
+
+.icon {
+  width: 75%;
+  max-width: 180px;
+}
+
+.sibling {
+  @include when-width(0, 576px) {
+    margin-top: 30px;
+  }
+}
+
+
+
