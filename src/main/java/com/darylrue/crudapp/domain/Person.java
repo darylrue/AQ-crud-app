@@ -1,11 +1,11 @@
 package com.darylrue.crudapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -48,7 +48,10 @@ public class Person {
     @Size(min = 5, max = 5, message = "Zip code is required with length 5")
     private String zipCode;
 
-    private Integer client;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "companyId")
+    private Client client;
 
 
     //GETTERS AND SETTERS
@@ -116,12 +119,23 @@ public class Person {
         this.zipCode = zipCode;
     }
 
-    public Integer getClient() {
+    public Client getClient() {
         return client;
     }
 
-    public void setClient(Integer client) {
+    public void setClient(Client client) {
         this.client = client;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if(o == this) return true;
+        if(!(o instanceof Person)) return false;
+        return this.personId != null && this.personId.equals(((Person)o).personId);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.personId.hashCode();
+    }
 }

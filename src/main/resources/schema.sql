@@ -22,8 +22,8 @@ CREATE TABLE person (
   city varchar(50) NOT NULL,
   state varchar(2) NOT NULL,
   zip_code varchar(5) NOT NULL,
-  client varchar(50),
-  foreign key (client) references client(company_id)
+  company_id varchar(50),
+  foreign key (company_id) references client(company_id)
 );
 
 

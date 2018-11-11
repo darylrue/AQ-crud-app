@@ -1,0 +1,120 @@
+# HTML Landing Page
+GET http://localhost:8080/
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-11-11T114259.200.html
+
+
+
+###
+
+# Get person list
+GET http://localhost:8080/api/person/list
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-11-11T120331.200.json
+<> 2018-11-11T114303.200.json
+<> 2018-11-11T113447.200.json
+
+
+
+###
+
+# Get person by ID
+GET http://localhost:8080/api/person/1
+Accept: */*
+Cache-Control: no-cache
+
+
+
+###
+
+# Create new person with no client
+POST http://localhost:8080/api/person/create
+Content-Type: application/json
+
+{
+  "firstName": "Daryl",
+  "lastName": "Rue",
+  "emailAddress": "daryl@email.com",
+  "streetAddress": "123 Really Cool St.",
+  "city": "Paradise",
+  "state": "CA",
+  "zipCode": "12345",
+  "companyId": 2
+}
+
+###
+
+# Create new person with an existing client
+POST http://localhost:8080/api/person/create
+Content-Type: application/json
+
+{
+  "firstName": "Daryl",
+  "lastName": "Rue",
+  "emailAddress": "daryl@email.com",
+  "streetAddress": "123 Really Cool St.",
+  "city": "Paradise",
+  "state": "CA",
+  "zipCode": "12345",
+  "companyId": 2,
+  "client": {
+    "companyId": 2,
+    "companyName": "Fake Company 1",
+    "websiteUri": "www.we-do-stuff.com",
+    "phone": "555-555-5555",
+    "physStreet": "123 Company St.",
+    "physCity": "Asheville",
+    "physState": "NC",
+    "physZipCode": "28801",
+    "mailStreet": "123 Company St.",
+    "mailCity": "Asheville",
+    "mailState": "NC",
+    "mailZipCode": "28801",
+    "contacts": null
+  }
+}
+
+###
+
+# Edit a person
+PUT http://localhost:8080/api/person/edit
+Content-Type: application/json
+
+{
+  "personId": 2,
+  "firstName": "Daryl",
+  "lastName": "Rue",
+  "emailAddress": "daryl@email.com",
+  "streetAddress": "123 Really Cool St.",
+  "city": "Paradise",
+  "state": "CA",
+  "zipCode": "12345",
+  "client": {
+    "companyId": 1,
+    "companyName": "Fake Company 1",
+    "websiteUri": "www.we-do-stuff.com",
+    "phone": "555-555-5555",
+    "physStreet": "123 Company St.",
+    "physCity": "Asheville",
+    "physState": "NC",
+    "physZipCode": "28801",
+    "mailStreet": "123 Company St.",
+    "mailCity": "Asheville",
+    "mailState": "NC",
+    "mailZipCode": "28801",
+    "contacts": null
+  }
+}
+
+
+
+###
+
+# Delete a person
+DELETE http://localhost:8080/api/person/3
+
+###

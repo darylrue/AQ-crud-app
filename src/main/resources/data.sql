@@ -44,7 +44,7 @@ INSERT INTO person(
     city,
     state,
     zip_code,
-    client
+    company_id
 ) VALUES (
     'John',
     'Smith',

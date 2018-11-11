@@ -1,0 +1,177 @@
+# Get client list
+GET http://localhost:8080/api/client/list
+Accept: */*
+Cache-Control: no-cache
+
+
+###
+
+# Get client by ID
+GET http://localhost:8080/api/client/2
+Accept: */*
+Cache-Control: no-cache
+
+
+###
+
+# Create new client
+POST http://localhost:8080/api/client/create
+Content-Type: application/json
+
+{
+  "companyName": "Added Company",
+  "websiteUri": "www.added-website.com",
+  "phone": "333-333-3333",
+  "physStreet": "1234 Added St.",
+  "physCity": "Asheville",
+  "physState": "NC",
+  "physZipCode": "28801",
+  "mailStreet": "PO Box 123",
+  "mailCity": "Asheville",
+  "mailState": "NC",
+  "mailZipCode": "28801"
+}
+
+<> 2018-11-10T112955.200.json
+<> 2018-11-10T112917.200.json
+<> 2018-11-10T112903.400.json
+<> 2018-11-10T112744.400.json
+
+###
+
+# Create new client, adding contacts, one of which is not in the DB
+POST http://localhost:8080/api/client/create
+Content-Type: application/json
+
+{
+  "companyName": "Added Company",
+  "phone": "333-333-3333",
+  "physStreet": "1234 Added St.",
+  "physCity": "Asheville",
+  "physState": "NC",
+  "physZipCode": "28801",
+  "mailStreet": "PO Box 123",
+  "mailCity": "Asheville",
+  "mailState": "NC",
+  "mailZipCode": "28801",
+  "contacts": [
+    {
+      "personId": 1,
+      "firstName": "John",
+      "lastName": "Smith",
+      "emailAddress": "fake1@email.com",
+      "streetAddress": "123 Any St.",
+      "city": "Asheville",
+      "state": "NC",
+      "zipCode": "28801"
+    },
+    {
+      "firstName": "New",
+      "lastName": "Contact",
+      "emailAddress": "fake2@email.com",
+      "streetAddress": "123 Any St.",
+      "city": "Asheville",
+      "state": "NC",
+      "zipCode": "28801"
+    }
+  ]
+}
+
+<> 2018-11-10T113025.200.json
+<> 2018-11-10T113008.400.json
+
+###
+
+# Edit a client
+PUT http://localhost:8080/api/client/edit
+Content-Type: application/json
+
+{
+  "companyId": 1,
+  "companyName": "Edited Company",
+  "websiteUri": "www.edited-website.com",
+  "phone": "333-333-3333",
+  "physStreet": "1234 Added St.",
+  "physCity": "Asheville",
+  "physState": "NC",
+  "physZipCode": "28801",
+  "mailStreet": "PO Box 123",
+  "mailCity": "Asheville",
+  "mailState": "NC",
+  "mailZipCode": "28801"
+}
+
+<> 2018-11-10T113206.200.json
+
+###
+
+# Edit a client, adding 1 new contact and removing 1
+PUT http://localhost:8080/api/client/edit
+Content-Type: application/json
+
+{
+  "companyId": 2,
+  "companyName": "Edited Company",
+  "websiteUri": "www.edited-website.com",
+  "phone": "333-333-3333",
+  "physStreet": "1234 Added St.",
+  "physCity": "Asheville",
+  "physState": "NC",
+  "physZipCode": "28801",
+  "mailStreet": "PO Box 123",
+  "mailCity": "Asheville",
+  "mailState": "NC",
+  "mailZipCode": "28801",
+  "contacts": [
+    {
+      "personId": 1,
+      "firstName": "John",
+      "lastName": "Smith",
+      "emailAddress": "fake1@email.com",
+      "streetAddress": "123 Any St.",
+      "city": "Asheville",
+      "state": "NC",
+      "zipCode": "28801"
+    },
+    {
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "emailAddress": "fake2@email.com",
+      "streetAddress": "123 Any St.",
+      "city": "Asheville",
+      "state": "NC",
+      "zipCode": "28801"
+    }
+  ]
+}
+
+###
+
+# Edit a client with empty website
+PUT http://localhost:8080/api/client/edit
+Content-Type: application/json
+
+{
+  "companyId": 1,
+  "companyName": "Edited Company",
+//  "websiteUri": "",
+  "phone": "333-333-3333",
+  "physStreet": "1234 Added St.",
+  "physCity": "Asheville",
+  "physState": "NC",
+  "physZipCode": "28801",
+  "mailStreet": "PO Box 123",
+  "mailCity": "Asheville",
+  "mailState": "NC",
+  "mailZipCode": "28801"
+}
+
+<> 2018-11-10T113339.200.json
+<> 2018-11-10T113254.200.json
+
+###
+
+# Delete a client
+DELETE http://localhost:8080/api/client/1
+
+###

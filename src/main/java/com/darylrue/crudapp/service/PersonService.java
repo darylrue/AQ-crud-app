@@ -1,6 +1,7 @@
 package com.darylrue.crudapp.service;
 
 import com.darylrue.crudapp.domain.Person;
+import com.darylrue.crudapp.dto.PersonDto;
 import com.darylrue.crudapp.util.Confirmation;
 
 import java.util.List;
@@ -13,33 +14,33 @@ public interface PersonService {
     /**
      * Retrieves all of the person records.
      *
-     * @return list of person records
+     * @return list of person record DTOs
      */
-    List<Person> listPeople();
+    List<PersonDto> listPeople();
 
     /**
      * Creates a new person record.
      *
-     * @param person the values to save
+     * @param personDto the values to save
      * @return the new person ID
      */
-    Integer createPerson(Person person);
+    Integer createPerson(PersonDto personDto);
 
     /**
      * Retrieves a person record by ID.
      *
      * @param id the person ID
-     * @return the person record
+     * @return the person record DTO
      */
-    Person readPerson(Integer id);
+    PersonDto readPerson(Integer id);
 
     /**
      * Updates an existing person record.
      *
-     * @param person the Person object to be updated
+     * @param personDto the Person object to be updated by the DTO
      * @return a Confirmation object (Confirmation.success : boolean, Confirmation.message : String)
      */
-    Confirmation updatePerson(Person person);
+    Confirmation updatePerson(PersonDto personDto);
 
     /**
      * Deletes a person record by ID.

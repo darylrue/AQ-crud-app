@@ -1,13 +1,13 @@
 package com.darylrue.crudapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 /**
  * The client entity corresponding to the "client" table in the database.
@@ -63,6 +63,9 @@ public class Client {
     @Size(min = 5, max = 5, message = "Mailing zip code must be 5 characters")
     private String mailZipCode;
 
+    @OneToMany
+    @JoinColumn(name = "companyId")
+    private List<Person> contacts;
 
     //GETTERS AND SETTERS
     public Integer getCompanyId() {
@@ -161,5 +164,12 @@ public class Client {
         this.mailZipCode = mailZipCode;
     }
 
+    public List<Person> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Person> contacts) {
+        this.contacts = contacts;
+    }
 }
 
