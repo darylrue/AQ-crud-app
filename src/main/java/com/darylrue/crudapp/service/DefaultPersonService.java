@@ -1,20 +1,4 @@
 package com.darylrue.crudapp.service;
-//
-//import com.darylrue.crudapp.service.PersonService;
-//import com.darylrue.crudapp.domain.Person;
-//import org.springframework.jdbc.core.RowMapper;
-//import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-//import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-//import org.springframework.jdbc.support.GeneratedKeyHolder;
-//import org.springframework.jdbc.support.KeyHolder;
-//import org.springframework.transaction.annotation.Propagation;
-//import org.springframework.transaction.annotation.Transactional;
-//
-//import java.sql.ResultSet;
-//import java.sql.SQLException;
-//import java.util.Collections;
-//import java.util.List;
-//
 
 import com.darylrue.crudapp.dao.PersonRepository;
 import com.darylrue.crudapp.domain.Person;
@@ -22,12 +6,10 @@ import com.darylrue.crudapp.util.Confirmation;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-
 import java.util.List;
 
 /**
- * Spring JDBC implementation of {@link PersonService}.
+ * Spring JPA implementation of {@link PersonService}.
  */
 @Component
 public class DefaultPersonService implements PersonService {
@@ -44,11 +26,6 @@ public class DefaultPersonService implements PersonService {
         return personRepository.findAll();
     }
 
-    /**
-     *
-     * @param personId
-     * @return the Person object
-     */
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Person readPerson(Integer personId) {
@@ -77,11 +54,6 @@ public class DefaultPersonService implements PersonService {
         return new Confirmation(false, "Person not found.");
     }
 
-    /**
-     *
-     * @param person the values to save
-     * @return the generated Integer id of the persisted person object
-     */
     @Override
     @Transactional(propagation = Propagation.SUPPORTS)
     public Integer createPerson(Person person) {

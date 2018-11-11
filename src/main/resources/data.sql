@@ -18,10 +18,10 @@ INSERT INTO client(
     'Asheville',
     'NC',
     '28801',
-    null,
-    null,
-    null,
-    null
+    '123 Company St.',
+    'Asheville',
+    'NC',
+    '28801'
 ), (
     'Fake Company 2',
     'www.we-do-stuff-too.com',

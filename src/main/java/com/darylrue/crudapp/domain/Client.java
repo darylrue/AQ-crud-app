@@ -47,15 +47,19 @@ public class Client {
     @Size(min = 5, max = 5, message = "Physical zip code is required with length 5")
     private String physZipCode;
 
+    @NotNull
     @Size(max = 50, message = "Mailing street address cannot be longer than 50 characters")
     private String mailStreet;
 
+    @NotNull
     @Size(max = 50, message = "Mailing city cannot be longer than 50 characters")
     private String mailCity;
 
+    @NotNull
     @Size(min = 2, max = 2, message = "Mailing state must be 2 characters")
     private String mailState;
 
+    @NotNull
     @Size(min = 5, max = 5, message = "Mailing zip code must be 5 characters")
     private String mailZipCode;
 

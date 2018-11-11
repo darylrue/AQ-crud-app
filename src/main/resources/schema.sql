@@ -7,10 +7,10 @@ CREATE TABLE client (
   phys_city varchar(50) NOT NULL,
   phys_state varchar(2) NOT NULL,
   phys_zip_code varchar(5) NOT NULL,
-  mail_street varchar(50),
-  mail_city varchar(50),
-  mail_state varchar(2),
-  mail_zip_code varchar(5),
+  mail_street varchar(50) NOT NULL,
+  mail_city varchar(50) NOT NULL,
+  mail_state varchar(2) NOT NULL,
+  mail_zip_code varchar(5) NOT NULL
 );
 
 CREATE TABLE person (
