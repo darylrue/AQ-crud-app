@@ -1,14 +1,13 @@
 package com.darylrue.crudapp.service;
 
 import com.darylrue.crudapp.domain.Person;
-import org.springframework.stereotype.Service;
+import com.darylrue.crudapp.util.Confirmation;
 
 import java.util.List;
 
 /**
- * Person operations.
+ * Operations on the "person" table.
  */
-@Service
 public interface PersonService {
 
     /**
@@ -37,22 +36,23 @@ public interface PersonService {
     /**
      * Updates an existing person record.
      *
-     * @param person the new values to save
+     * @param person the Person object to be updated
+     * @return a Confirmation object (Confirmation.success : boolean, Confirmation.message : String)
      */
-    void updatePerson(Person person);
+    Confirmation updatePerson(Person person);
 
     /**
      * Deletes a person record by ID.
      *
      * @param id the person ID
+     * @return a Confirmation object (Confirmation.success : boolean, Confirmation.message : String)
      */
-    void deletePerson(Integer id);
+    Confirmation deletePerson(Integer id);
 
     /**
-     * Validates populated person data.
      *
-     * @param person the values to validate
-     * @return list of error messages
+     * @param id the person ID
+     * @return true if there is a record in the database with the given ID, false otherwise
      */
-    List<String> validatePerson(Person person);
+    boolean exists(Integer id);
 }
