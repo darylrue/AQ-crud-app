@@ -12,6 +12,9 @@ import { ClientsComponent } from './components/clients/clients.component';
 import { CreatePersonComponent } from './components/people/create-person/create-person.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { EditPersonComponent } from './components/people/edit-person/edit-person.component';
+import { DeletePersonComponent } from './components/people/delete-person/delete-person.component';
+import {MatProgressBarModule, MatProgressSpinnerModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,13 +23,17 @@ import { EditPersonComponent } from './components/people/edit-person/edit-person
     HomeComponent,
     ClientsComponent,
     CreatePersonComponent,
-    EditPersonComponent
+    EditPersonComponent,
+    DeletePersonComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    BrowserAnimationsModule
   ],
   providers: [PeopleService],
   bootstrap: [AppComponent]

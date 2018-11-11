@@ -11,20 +11,31 @@ import {PeopleService} from "../../services/people.service";
 export class PeopleComponent implements OnInit {
 
   people;
+  dataReceived: boolean = false;
 
   constructor(private peopleService: PeopleService) { }
 
   ngOnInit() {
     this.getPeople();
-    // this.people = []; //to test the 'No Results Found' message
+    // this.mockNoResults(); //to test the 'No Results Found' message
   }
 
   getPeople() {
     this.peopleService.getPeople().subscribe(
-      data => this.people = data,
-      err => console.error(err),
+      data => {
+        this.dataReceived = true;
+        this.people = data; },
+      err => {
+        this.dataReceived = true;
+        console.error(err)
+      },
       () => console.log('people populated.')
     );
+  }
+
+  mockNoResults() {
+    this.people = [];
+    this.dataReceived = true;
   }
 
 }

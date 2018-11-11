@@ -11,7 +11,6 @@ import {ValidationErrorService} from "../../../services/ValidationErrorService";
 })
 export class EditPersonComponent implements OnInit {
 
-  person;
   editPersonForm: FormGroup;
   validMessage: string = '';
   errors: string[] = [];
@@ -25,6 +24,7 @@ export class EditPersonComponent implements OnInit {
     'state': 'State',
     'zipCode': 'Zip code'
   };
+  dataReceived: boolean = false;
 
   constructor(private peopleService: PeopleService, private route: ActivatedRoute) { }
 
@@ -45,19 +45,23 @@ export class EditPersonComponent implements OnInit {
   getPerson(id: number) {
     this.peopleService.getPerson(id).subscribe(
       data => {
-          let person = <any>data;
-          this.editPersonForm.patchValue({
-            personId: person.personId,
-            firstName: person.firstName,
-            lastName: person.lastName,
-            emailAddress: person.emailAddress,
-            streetAddress: person.streetAddress,
-            city: person.city,
-            state: person.state,
-            zipCode: person.zipCode
-          });
-        },
-      err => { console.error(err); },
+        this.dataReceived = true;
+        let person = <any>data;
+        this.editPersonForm.patchValue({
+          personId: person.personId,
+          firstName: person.firstName,
+          lastName: person.lastName,
+          emailAddress: person.emailAddress,
+          streetAddress: person.streetAddress,
+          city: person.city,
+          state: person.state,
+          zipCode: person.zipCode
+        });
+      },
+      err => {
+        this.dataReceived = true;
+        console.error(err);
+      },
     () => { console.log('person populated.'); }
     );
   }

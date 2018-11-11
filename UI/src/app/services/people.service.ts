@@ -31,7 +31,8 @@ export class PeopleService {
     return this.http.put(`${domain}/api/person/edit`, body, httpOptions);
   }
 
-  deletePerson(person) {
-    return this.http.delete(`${domain}/api/person/${person.id}`);
+  deletePerson(id: number) {
+    console.log('deletePerson() called');
+    return this.http.delete(`${domain}/api/person/${id}`);
   }
 }

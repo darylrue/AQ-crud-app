@@ -23,6 +23,7 @@ export class CreatePersonComponent implements OnInit {
     'state': 'State',
     'zipCode': 'Zip code'
   };
+  dataReceived: boolean = true;
 
   constructor(private peopleService: PeopleService) { }
 
@@ -68,14 +69,17 @@ export class CreatePersonComponent implements OnInit {
 
   submitCreatePersonForm() {
     if(this.createPersonForm.valid) {
+      this.dataReceived = false;
       this.peopleService.createPerson(this.createPersonForm.value).subscribe(
         data => {
+          this.dataReceived = true;
           this.validMessage = this.createPersonForm.value['firstName'] + ' created successfully.';
           this.errors = [];
           this.createPersonForm.reset();
           return true;
         },
         err => {
+          this.dataReceived = true;
           console.error(err);
           this.validMessage = 'Uh oh. We are having trouble submitting the form. ' +
             'Please call support at 555-555-5555 for assistance.';
