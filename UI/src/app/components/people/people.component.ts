@@ -23,8 +23,9 @@ export class PeopleComponent implements OnInit {
   getPeople() {
     this.peopleService.getPeople().subscribe(
       data => {
+        this.people = data;
         this.dataReceived = true;
-        this.people = data; },
+        },
       err => {
         this.dataReceived = true;
         console.error(err)

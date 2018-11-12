@@ -32,7 +32,6 @@ export class PeopleService {
   }
 
   deletePerson(id: number) {
-    console.log('deletePerson() called');
     return this.http.delete(`${domain}/api/person/${id}`);
   }
 }

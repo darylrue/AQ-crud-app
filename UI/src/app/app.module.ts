@@ -15,6 +15,9 @@ import { EditPersonComponent } from './components/people/edit-person/edit-person
 import { DeletePersonComponent } from './components/people/delete-person/delete-person.component';
 import {MatProgressBarModule, MatProgressSpinnerModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CreateClientComponent } from './components/clients/create-client/create-client.component';
+import { EditClientComponent } from './components/clients/edit-client/edit-client.component';
+import { DeleteClientComponent } from './components/clients/delete-client/delete-client.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ClientsComponent,
     CreatePersonComponent,
     EditPersonComponent,
-    DeletePersonComponent
+    DeletePersonComponent,
+    CreateClientComponent,
+    EditClientComponent,
+    DeleteClientComponent
   ],
   imports: [
     BrowserModule,

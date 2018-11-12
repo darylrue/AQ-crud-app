@@ -41,15 +41,18 @@ export class DeletePersonComponent implements OnInit {
   }
 
   delete() {
+    this.dataReceived = false;
     this.peopleService.deletePerson(this.id).subscribe(
       data => {
           this.responseMsg = `Person ${this.firstName} ${this.lastName} 
             has been successfully deleted.`;
           this.success = true;
+          this.dataReceived = true;
         },
       err => {
           this.responseMsg = `Person ${this.firstName} ${this.lastName}
             not found.`;
+          this.dataReceived = true;
       },
       () => { console.log('delete request complete.'); }
     );

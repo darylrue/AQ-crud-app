@@ -1,3 +1,44 @@
-<p>
-  clients works!
-</p>
+<div class="container">
+  <div *ngIf="!dataReceived; else displayContent">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  <ng-template #displayContent>
+    <h1 class="mt-4">Client Listing</h1>
+    <div class="mt-4">
+      <a [routerLink]="'/create-client'">Create New Client</a>
+    </div>
+    <div *ngIf="clients?.length > 0; else noResults" class="table-wrapper mt-4" >
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Company Name</th>
+          <th>Website URI</th>
+          <th>Phone</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Contacts</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let client of clients">
+          <td>{{client.companyName}}</td>
+          <td>{{client.websiteUri}}</td>
+          <td>{{client.phone}}</td>
+          <td>{{client.physCity}}</td>
+          <td>{{client.physState}}</td>
+          <td><div *ngFor="let contact of client.contacts">{{contact.firstName}} {{contact.lastName}}</div></td>
+          <td>
+            <a [routerLink]="['/edit-client', client.companyId]" class="text-nowrap">Edit Client</a>
+            <a [routerLink]="'/delete-client'" [queryParams]="{id: client.companyId,
+               companyName: client.companyName}" class="ml-4 text-nowrap">Delete Client</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <ng-template #noResults>
+      <h5 class="mt-4">No results found.</h5>
+    </ng-template>
+  </ng-template>
+</div>

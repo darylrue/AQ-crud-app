@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {PeopleService} from "../../../services/people.service";
-import {FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ValidationErrorService} from "../../../services/ValidationErrorService";
 
 

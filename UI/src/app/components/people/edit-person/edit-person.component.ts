@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PeopleService} from "../../../services/people.service";
 import {ActivatedRoute} from "@angular/router";
 import {ValidationErrorService} from "../../../services/ValidationErrorService";
+import {ClientService} from "../../../services/client.service";
 
 @Component({
   selector: 'app-edit-person',
@@ -24,28 +25,60 @@ export class EditPersonComponent implements OnInit {
     'state': 'State',
     'zipCode': 'Zip code'
   };
-  dataReceived: boolean = false;
+  clients: any[] = [];
+  personReceived: boolean = false;
+  clientsReceived: boolean = false;
 
-  constructor(private peopleService: PeopleService, private route: ActivatedRoute) { }
+  constructor(private peopleService: PeopleService, private clientService: ClientService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getPerson(this.route.snapshot.params.id);
+    this.getClients();
     this.editPersonForm = new FormGroup({
       personId: new FormControl(''),
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
-      emailAddress: new FormControl('', Validators.required),
-      streetAddress: new FormControl('', Validators.required),
-      city: new FormControl('', Validators.required),
-      state: new FormControl('', Validators.required),
-      zipCode: new FormControl('', Validators.required)
+      firstName: new FormControl('', [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(50)
+        ]),
+      lastName: new FormControl('', [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(50)
+      ]),
+      emailAddress: new FormControl('', [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(50)
+      ]),
+      streetAddress: new FormControl('', [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(50)
+      ]),
+      city: new FormControl('', [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(50)
+      ]),
+      state: new FormControl('', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(2)
+      ]),
+      zipCode: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(5)
+      ]),
+      client: new FormControl(null)
     });
   }
 
   getPerson(id: number) {
     this.peopleService.getPerson(id).subscribe(
       data => {
-        this.dataReceived = true;
         let person = <any>data;
         this.editPersonForm.patchValue({
           personId: person.personId,
@@ -55,30 +88,53 @@ export class EditPersonComponent implements OnInit {
           streetAddress: person.streetAddress,
           city: person.city,
           state: person.state,
-          zipCode: person.zipCode
+          zipCode: person.zipCode,
+          client: person.client
         });
+        this.personReceived = true;
       },
       err => {
-        this.dataReceived = true;
         console.error(err);
+        this.personReceived = true;
       },
-    () => { console.log('person populated.'); }
+    () => {
+        console.log('person populated.');
+      }
+    );
+  }
+
+  getClients() {
+    this.clientService.getClients().subscribe(
+      data => {
+        this.clients = <any>data;
+        this.clientsReceived = true;
+      },
+      err => {
+        console.log(err);
+        this.clientsReceived = true;
+      },
+      () => {
+        console.log('clients populated');
+      }
     );
   }
 
   submitEditPersonForm() {
     if(this.editPersonForm.valid) {
+      this.clientsReceived = false; //to show the progress indicator
       this.peopleService.editPerson(this.editPersonForm.value).subscribe(
         data => {
           this.validMessage = 'Your changes have been saved.';
           this.errors = [];
           this.submitted = true;
+          this.clientsReceived = true; //stop the progress indicator
           return true;
         },
         err => {
           console.error(err);
           this.validMessage = 'Uh oh. We are having trouble submitting the form. ' +
             'Please call support at 555-555-5555 for assistance.';
+          this.clientsReceived = true; //stop the progress indicator
         },
         () => { console.log('form submission complete.') }
       );
@@ -86,6 +142,12 @@ export class EditPersonComponent implements OnInit {
       this.validMessage = 'Please correct the following errors before submitting:';
       this.errors = ValidationErrorService.getValidationErrors(this.editPersonForm, this.properNames);
     }
+  }
+
+  equals(client1, client2) {
+    if(client1 === null && client2 === null) return true;
+    if(!(client1 && client2)) return false;
+    return client1.companyId === client2.companyId;
   }
 
 }
