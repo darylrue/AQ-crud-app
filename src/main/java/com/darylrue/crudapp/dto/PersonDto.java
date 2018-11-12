@@ -12,8 +12,6 @@ public class PersonDto {
     private String city;
     private String state;
     private String zipCode;
-//    private Integer companyId;
-//    private String companyName;
     private Client client;
 
     public Integer getPersonId() {
@@ -79,23 +77,6 @@ public class PersonDto {
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
-
-//    public Integer getCompanyId() {
-//        return companyId;
-//    }
-//
-//    public void setCompanyId(Integer companyId) {
-//        this.companyId = companyId;
-//    }
-//
-//    public String getCompanyName() {
-//        return companyName;
-//    }
-//
-//    public void setCompanyName(String companyName) {
-//        this.companyName = companyName;
-//    }
-
 
     public Client getClient() {
         return client;
