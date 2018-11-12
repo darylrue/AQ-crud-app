@@ -53,7 +53,6 @@ public class DefaultClientService implements ClientService {
         Integer id = client.getCompanyId();
         if(id == null) return new Confirmation(false, "Id cannot be null.");
         if(clientRepository.existsById(id)) {
-            handleAddedContacts(client);
             clientRepository.save(client);
             return new Confirmation(true);
         }
@@ -63,7 +62,6 @@ public class DefaultClientService implements ClientService {
     @Override
     @Transactional
     public Integer createClient(Client client) {
-        handleAddedContacts(client);
         Client persistedClient = clientRepository.save(client);
         return persistedClient.getCompanyId();
     }
@@ -72,14 +70,6 @@ public class DefaultClientService implements ClientService {
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public boolean exists(Integer companyId) {
         return clientRepository.existsById(companyId);
-    }
-
-    private void handleAddedContacts(Client client) {
-        if(client.getContacts() != null) {
-            for(Person person : client.getContacts()) {
-                person = personRepository.save(person);
-            }
-        }
     }
 
 }

@@ -1,6 +1,7 @@
 package com.darylrue.crudapp.controller;
 
 import com.darylrue.crudapp.domain.Client;
+import com.darylrue.crudapp.domain.Person;
 import com.darylrue.crudapp.service.ClientService;
 import com.darylrue.crudapp.util.Confirmation;
 import org.springframework.http.HttpStatus;
@@ -46,6 +47,14 @@ public class ClientRestController {
 
     @PutMapping("/edit")
     public ResponseEntity<Confirmation> editClient(@RequestBody @Valid Client client) {
+
+        //TODO debug
+        System.out.println("editClient() received payload...");
+        System.out.println("Contacts length: " + client.getContacts().size());
+        for(Person person: client.getContacts()) {
+            System.out.println("personId: " + person.getPersonId() + ", firstName: " + person.getFirstName());
+        }
+
         Confirmation confirmation = clientService.updateClient(client);
         if(confirmation.success) {
             return new ResponseEntity<>(confirmation, HttpStatus.OK);

@@ -144,10 +144,8 @@ export class EditPersonComponent implements OnInit {
     }
   }
 
-  equals(client1, client2) {
-    if(client1 === null && client2 === null) return true;
-    if(!(client1 && client2)) return false;
-    return client1.companyId === client2.companyId;
+  equals(item1, item2) {
+    return item1 && item2 ? item1.companyId === item2.companyId : item1 === item2;
   }
 
 }

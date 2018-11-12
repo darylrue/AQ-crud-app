@@ -32,6 +32,7 @@ export class EditClientComponent implements OnInit {
   people: any[] = [];
   peopleReceived: boolean = false;
   clientReceived: boolean = false;
+  selectedContacts: any[] = [];
 
   constructor(private peopleService: PeopleService, private clientService: ClientService,
               private route: ActivatedRoute) { }
@@ -46,11 +47,8 @@ export class EditClientComponent implements OnInit {
         Validators.minLength(1),
         Validators.maxLength(50)
       ]),
-      websiteUri: new FormControl('', [
-        Validators.required,
-        Validators.minLength(1),
-        Validators.maxLength(50)
-      ]),
+      websiteUri: new FormControl('',
+        Validators.maxLength(50)),
       phone: new FormControl('', [
         Validators.required,
         Validators.minLength(1),
@@ -96,7 +94,7 @@ export class EditClientComponent implements OnInit {
         Validators.minLength(5),
         Validators.maxLength(5)
       ]),
-      contacts: new FormControl(null)
+      contacts: new FormControl()
     });
   }
 
@@ -119,6 +117,7 @@ export class EditClientComponent implements OnInit {
           mailZipCode: client.mailZipCode,
           contacts: client.contacts
         });
+        // this.selectedContacts = client.contacts;
         this.clientReceived = true;
       },
       err => {
@@ -149,6 +148,10 @@ export class EditClientComponent implements OnInit {
 
   submitEditClientForm() {
     if(this.editClientForm.valid) {
+
+      //TODO debug
+      console.log(JSON.stringify(this.editClientForm.value));
+
       this.clientReceived = false; //start progress indicator
       this.clientService.editClient(this.editClientForm.value).subscribe(
         data => {
@@ -172,10 +175,8 @@ export class EditClientComponent implements OnInit {
     }
   }
 
-  equals(person1, person2) {
-    if(person1 === null && person2 === null) return true;
-    if(!(person1 && person2)) return false;
-    return person1.companyId === person2.companyId;
+  equals(item1, item2) {
+    return item1 && item2 ? item1.personId === item2.personId : item1 === item2;
   }
 
 }

@@ -11,6 +11,7 @@ import {ClientService} from "../../services/client.service";
 export class ClientsComponent implements OnInit {
 
   clients;
+  columnsToDisplay = ['companyName', 'websiteUri', 'phone', 'physCity', 'physState', 'contacts', 'actions'];
   dataReceived: boolean = false;
 
   constructor(private clientService: ClientService) { }

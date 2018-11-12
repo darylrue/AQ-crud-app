@@ -10,10 +10,16 @@ import { PeopleComponent } from './components/people/people.component';
 import { HomeComponent } from './components/home/home.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { CreatePersonComponent } from './components/people/create-person/create-person.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { EditPersonComponent } from './components/people/edit-person/edit-person.component';
 import { DeletePersonComponent } from './components/people/delete-person/delete-person.component';
-import {MatProgressBarModule, MatProgressSpinnerModule} from '@angular/material';
+import {
+  MatOptionModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatSelectModule, MatSortModule,
+  MatTableModule
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CreateClientComponent } from './components/clients/create-client/create-client.component';
 import { EditClientComponent } from './components/clients/edit-client/edit-client.component';
@@ -39,7 +45,12 @@ import { DeleteClientComponent } from './components/clients/delete-client/delete
     ReactiveFormsModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSelectModule,
+    MatOptionModule,
+    FormsModule,
+    MatTableModule,
+    MatSortModule
   ],
   providers: [PeopleService],
   bootstrap: [AppComponent]

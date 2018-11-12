@@ -1,0 +1,48 @@
+@import "../../mixins";
+
+:host ::ng-deep div.mat-form-field-wrapper {
+  min-width: 300px;
+
+  @include when-width(992px) {
+    min-width: 400px;
+  }
+
+  @include when-width(1200px) {
+    min-width: 500px;
+  }
+}
+
+label {
+  color: #999;
+}
+
+$panel-color: #acd;
+$border-radius: 10px;
+
+.panel-group {
+  margin-top: 25px;
+}
+
+.panel-heading {
+  background-color: $panel-color;
+  border: $panel-color 1px solid;
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+  min-height: 50px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.panel-body {
+  border: $panel-color 1px solid;
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+  padding: 15px;
+}
+
+
+
+

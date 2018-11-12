@@ -27,7 +27,11 @@
           <td>{{client.phone}}</td>
           <td>{{client.physCity}}</td>
           <td>{{client.physState}}</td>
-          <td><div *ngFor="let contact of client.contacts">{{contact.firstName}} {{contact.lastName}}</div></td>
+          <td>
+            <div *ngFor="let contact of client.contacts">
+              <a [routerLink]="['/edit-person', contact.personId]">{{contact.firstName}} {{contact.lastName}}</a>
+            </div>
+          </td>
           <td>
             <a [routerLink]="['/edit-client', client.companyId]" class="text-nowrap">Edit Client</a>
             <a [routerLink]="'/delete-client'" [queryParams]="{id: client.companyId,
@@ -42,3 +46,4 @@
     </ng-template>
   </ng-template>
 </div>
+

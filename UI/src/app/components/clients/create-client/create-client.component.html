@@ -10,52 +10,74 @@
         {{error}}
       </h5>
     </div>
-    <form [formGroup]="createClientForm" (ngSubmit)="submitCreateClientForm()" class="mt-5" novalidate>
-      <div class="form-group">
-        <label>Company Name:</label>
-        <input type="text" class="form-control" formControlName="companyName" required autofocus />
+    <form [formGroup]="createClientForm" (ngSubmit)="submitCreateClientForm()" novalidate>
+      <div class="row mt-4">
+        <div class="form-group col-md-5">
+          <label>Company Name:</label>
+          <input type="text" class="form-control" formControlName="companyName" required autofocus />
+        </div>
+        <div class="form-group col-md-4">
+          <label>Website URI:</label>
+          <input type="text" class="form-control" formControlName="websiteUri" required />
+        </div>
+        <div class="form-group col-md-3">
+          <label>Phone:</label>
+          <input type="text" class="form-control" formControlName="phone" required />
+        </div>
       </div>
-      <div class="form-group">
-        <label>Website URI:</label>
-        <input type="text" class="form-control" formControlName="websiteUri" required />
+      <div class="row">
+        <div class="col-md">
+          <div class="panel-group">
+            <div class="panel-heading">
+              Physical Address
+            </div>
+            <div class="panel-body">
+              <div class="form-group">
+                <label>Physical Street Address:</label>
+                <input type="text" class="form-control" formControlName="physStreet" required />
+              </div>
+              <div class="form-group">
+                <label>Physical City:</label>
+                <input type="text" class="form-control" formControlName="physCity" required />
+              </div>
+              <div class="form-group">
+                <label>Physical State:</label>
+                <input type="text" class="form-control" formControlName="physState" required />
+              </div>
+              <div class="form-group">
+                <label>Physical Zip Code:</label>
+                <input type="text" class="form-control" formControlName="physZipCode" required />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="panel-group">
+            <div class="panel-heading">
+              Mailing Address
+            </div>
+            <div class="panel-body">
+              <div class="form-group">
+                <label>Mailing Street Address:</label>
+                <input type="text" class="form-control" formControlName="mailStreet" required />
+              </div>
+              <div class="form-group">
+                <label>Mailing City:</label>
+                <input type="text" class="form-control" formControlName="mailCity" required />
+              </div>
+              <div class="form-group">
+                <label>Mailing State:</label>
+                <input type="text" class="form-control" formControlName="mailState" required />
+              </div>
+              <div class="form-group">
+                <label>Mailing Zip Code:</label>
+                <input type="text" class="form-control" formControlName="mailZipCode" required />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label>Phone:</label>
-        <input type="text" class="form-control" formControlName="phone" required />
-      </div>
-      <div class="form-group">
-        <label>Physical Street Address:</label>
-        <input type="text" class="form-control" formControlName="physStreet" required />
-      </div>
-      <div class="form-group">
-        <label>Physical City:</label>
-        <input type="text" class="form-control" formControlName="physCity" required />
-      </div>
-      <div class="form-group">
-        <label>Physical State:</label>
-        <input type="text" class="form-control" formControlName="physState" required />
-      </div>
-      <div class="form-group">
-        <label>Physical Zip Code:</label>
-        <input type="text" class="form-control" formControlName="physZipCode" required />
-      </div>
-      <div class="form-group">
-        <label>Mailing Street Address:</label>
-        <input type="text" class="form-control" formControlName="mailStreet" required />
-      </div>
-      <div class="form-group">
-        <label>Mailing City:</label>
-        <input type="text" class="form-control" formControlName="mailCity" required />
-      </div>
-      <div class="form-group">
-        <label>Mailing State:</label>
-        <input type="text" class="form-control" formControlName="mailState" required />
-      </div>
-      <div class="form-group">
-        <label>Mailing Zip Code:</label>
-        <input type="text" class="form-control" formControlName="mailZipCode" required />
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary my-5">Submit</button>
     </form>
   </ng-template>
 </div>

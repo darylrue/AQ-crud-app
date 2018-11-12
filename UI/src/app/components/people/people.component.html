@@ -23,7 +23,7 @@
           <td>{{person.firstName}}</td>
           <td>{{person.lastName}}</td>
           <td>{{person.emailAddress}}</td>
-          <td>{{person.client?.companyName}}</td>
+          <td><a *ngIf="person.client" [routerLink]="['/edit-client', person.client.companyId]" >{{person.client.companyName}}</a></td>
           <td>
             <a [routerLink]="['/edit-person', person.personId]" class="text-nowrap">Edit Person</a>
             <a [routerLink]="'/delete-person'" [queryParams]="{id: person.personId,
